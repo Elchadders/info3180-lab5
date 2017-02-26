@@ -22,6 +22,13 @@ def secure_page():
     """Must be logged in to access this page"""
     return render_template('secure.html')
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'danger')
+    return redirect(url_for('home'))
+
 @app.route('/')
 def home():
     """Render website's home page."""
